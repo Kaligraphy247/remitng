@@ -1,51 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/tailwind.css">
-    <title>Send</title>
-</head>
-    
-<!-- body -->
-<body class="body-font bg-white min-h-min m-2">
-    <header>
-        <div class="inline-grid grid-cols-5 border-2 border-gray-300 w-full py-6 px-4 rounded  gap-4">
-            <a href="." class="col-span-2"><img class="w-24 border-2 rounded-md border-white" src="img/logo.png"></a>
-            <li class="list-none text-lg"><a href="/">Contact</a></li>
-            <li class="list-none text-lg"><a href="send.html">Send</a></li>
-            <li class="list-none text-lg"><a href="receive.html">Receive</a></li>
+{% extends 'base.html' %}
+{% block title%}Send{% endblock title %}
+
+{% block content %}
+<div class="border-2 border-gray-200 rounded-sm shadow-sm mx-auto w-[320px] my-20 px-4 py-4 md:w-[480px] lg:w-[640px]">
+    <p class="text-center text-xl pb-2">Send</p>
+        <form class="grid border-2 border-gray-200 px-4 rounded-md shadow-md py-4">
+        <label for="">Sender name</label>
+        <input class="border-2 border-gray-300 pl-1 pr-1 rounded-md mb-2" type="text">
+        <label for="">Sender email address</label>
+        <input class="border-2 border-gray-300 pl-1 pr-1 rounded-md mb-2" type="text">
+        <label for="">Recipient's name</label>
+        <input class="border-2 border-gray-300 pl-1 pr-1 rounded-md mb-2" type="text">
+        <label for="">Amount</label>
+        <input class="border-2 border-gray-300 pl-1 pr-1 rounded-md mb-2" type="text">
+        <label for="">NUBAN / Account no. </label>
+        <input class="border-2 border-gray-300 pl-1 pr-1 rounded-md mb-2" type="text">
+        <label for="">Bank</label>
+        <input class="border-2 border-gray-300 pl-1 pr-1 rounded-md mb-2" type="text">
+        <div class="flex items-center mb-4">
+            <input class="w-4 h-4 rounded text-blue-600 cursor-pointer" type="checkbox" name="" id="" required>
+            <label class="text-xs pl-2 font-medium text-gray-500">By checking this box, you agree that all information provided are correct!</label>
         </div>
-    </header>
-
-    <div class="border-2 border-gray-200 rounded-sm shadow-sm mx-auto w-[320px] my-20 px-4 py-4 md:w-[480px] lg:w-[640px]">
-        <p class="text-center text-xl pb-2">Send</p>
-            <form class="grid border-2 border-gray-200 px-4 rounded-md shadow-md py-4">
-            <label for="">Sender name</label>
-            <input class="border-2 border-gray-300 pl-1 pr-1 rounded-md mb-2" type="text">
-            <label for="">Sender email address</label>
-            <input class="border-2 border-gray-300 pl-1 pr-1 rounded-md mb-2" type="text">
-            <label for="">Recipient's name</label>
-            <input class="border-2 border-gray-300 pl-1 pr-1 rounded-md mb-2" type="text">
-            <label for="">Amount</label>
-            <input class="border-2 border-gray-300 pl-1 pr-1 rounded-md mb-2" type="text">
-            <label for="">NUBAN / Account no. </label>
-            <input class="border-2 border-gray-300 pl-1 pr-1 rounded-md mb-2" type="text">
-            <label for="">Bank</label>
-            <input class="border-2 border-gray-300 pl-1 pr-1 rounded-md mb-2" type="text">
-            <div class="flex items-center mb-4">
-                <input class="w-4 h-4 rounded text-blue-600 cursor-pointer" type="checkbox" name="" id="" required>
-                <label class="text-xs pl-2 font-medium text-gray-500">By checking this box, you agree that all information provided are correct!</label>
-            </div>
-            <div class="text-center">
-                <button class="text-white bg-blue-500 rounded-md w-16 h-8 focus:ring-blue-500">Send</button>
-            </div>
-            <p class="text-xs text-red-500 pt-2">Please ensure that the deiatils provided are correct*</p>
-            </form>
-    </div>
-
-    
-    <footer class="mt-8 mb-2 text-center text-green-300 text-xs w-full bottom-0 lg:pt-32">licences and other info</footer>
-</body>
-</html>
+        <div class="text-center">
+            <button class="text-white bg-blue-500 rounded-md w-16 h-8 focus:ring-blue-500">Send</button>
+        </div>
+        <p class="text-xs text-red-500 pt-2">Please ensure that the deiatils provided are correct*</p>
+        </form>
+</div>
+{% endblock %}

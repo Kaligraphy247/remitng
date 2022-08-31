@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="css/tailwind.css"> -->
+    <link rel="stylesheet" href="{{url_for('static', filename='style/base.css')}}">
+    <title>{% block title%}Home{% endblock title %}</title>
+</head>
+    
+<!-- body -->
+<body class="body-font bg-white min-h-min m-2">
+    <header>
+        <div class="inline-grid grid-cols-5 border-2 border-gray-300 w-full py-6 px-4 rounded  gap-4">
+            <a href="{{ url_for('views.index') }}" class="col-span-2"><img class="w-24 border-2 rounded-md border-white" src="{{ url_for('static', filename='img/logo.png') }}"></a>
+            <li class="list-none text-lg"><a href="{{ url_for('views.index') }}">Contact</a></li>
+            <li class="list-none text-lg"><a href="{{ url_for('views.send') }}">Send</a></li>
+            <li class="list-none text-lg"><a href="{{ url_for('views.receive') }}">Receive</a></li>
+        </div>
+    </header>
+        {% block content %}
+            <h1>helo</h1>
+        {% endblock content %}
+
+
+        <!-- footer section -->
+        <footer class="mt-8 mb-2 text-center text-green-300 text-xs w-full bottom-0 relative lg:pt-32">licences and other info</footer>
+        <script src="{{ url_for('static', filename='script/script.js') }}"></script>
+    </body>
+    </html>

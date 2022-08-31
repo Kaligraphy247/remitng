@@ -1,84 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="css/tailwind.css"> -->
-    <link rel="stylesheet" href="build/base.css">
-    <title>Home</title>
-</head>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div>
+    <p class="text-3xl text-gray-900 text-center pt-8 mb-2 first-letter:capitalize">Send and receive Euro to and from Nigeria</p>
+    <img src="{{ url_for('static', filename='img/geld.jpg') }}" alt="image of money from bahn.de" class="mx-auto rounded-md w-96 h-48 object-fill">
+</div>
+
+<div class="lg:mr-8 lg:ml-8 m-2">
+    <iframe class="mt-16 mb-16 border-solid border-2 shadow-green-200 shadow-md w-full h-fit" src="{{ url_for('views.prices') }}" title="Current Forex">
+    </iframe>
+</div>
+
+<!-- price calculator -->
+<div class="border-2 border-gray-50 mx-2 mb-8 rounded-b-sm shadow-sm py-8 shadow-green-200">
+    <div id="#forex-send" class="border-2 border-gray-100 mx-auto rounded-md py-6 px-4 w-fit grid">
+        <p class="text-center text-lg">Send</p>
+        <label for="euro" class="mr-l">Euro</label>
+        <input id="#euro" class="border-2 border-gray 300 rounded-md pl-2" value="1.00" type="number">
+        <label for="naira" class="mr-l">Naira</label>
+        <input id="#naira" class="border-2 border-gray 300 rounded-md pl-2" value="674" type="number" readonly>
+        <div class="text-center mt-4 grid grid-cols-2 gap-4">
+            <button class="bg-blue-500 text-white w-24 h-9 rounded-md" onclick=sendCalc()>Convert</button>
+            <button class="bg-yellow-500 text-white w-24 h-9 rounded-md" onclick=resetSendCalcBtn()>Reset</button>
+        </div>
+        <a class="text-xs text-gray-400 pt-2 hover:text-gray-600 cursor-pointer w-fit" onclick=toggleSendCalc()>Want to receive Euro?</a>
+    </div>
+
     
-<!-- body -->
-<body class="body-font bg-white min-h-min m-2">
-    <header>
-        <div class="inline-grid grid-cols-5 border-2 border-gray-300 w-full py-6 px-4 rounded  gap-4">
-            <a href="." class="col-span-2"><img class="w-24 border-2 rounded-md border-white" src="img/logo.png"></a>
-            <li class="list-none text-lg"><a href="/">Contact</a></li>
-            <li class="list-none text-lg"><a href="send.html">Send</a></li>
-            <li class="list-none text-lg"><a href="receive.html">Receive</a></li>
+    <div id="#forex-receive" class="border-2 border-gray-100 mx-auto rounded-md py-6 px-4 w-fit grid">
+        <p class="text-center text-lg">Receive</p>
+        <label for="euro" class="mr-l">Euro</label>
+        <input id="#euro-receive" class="border-2 border-gray 300 rounded-md pl-2" value="1.00" type="number">
+        <label for="naira" class="mr-l">Naira</label>
+        <input id="#naira-receive" class="border-2 border-gray 300 rounded-md pl-2" value="687" type="number" readonly>
+        <div class="text-center mt-4 grid grid-cols-2 gap-4">
+            <button class="bg-blue-500 text-white w-24 h-9 rounded-md" onclick=receiveCalc()>Convert</button>
+            <button class="bg-yellow-500 text-white w-24 h-9 rounded-md" onclick=resetReceiveCalcBtn()>Reset</button>
         </div>
-    </header>
+        <a class="text-xs text-gray-400 pt-2 hover:text-gray-600 cursor-pointer w-fit" onclick=toggleReceiveCalc()>Want to send Naira?</a>
+    </div>
+</div>
 
-
-    <div>
-        <p class="text-3xl text-gray-900 text-center pt-8 mb-2 first-letter:capitalize">Send and receive Euro to and from Nigeria</p>
-        <img src="img/geld.jpg" alt="image of money from bahn.de" class="mx-auto rounded-md w-96 h-48 object-fill">
+<!-- send and receive section -->
+<div class="inline-grid grid-cols-2 border-2 shadow-md rounded-b-md shadow-green-200 m-2 pr-8 pl-8 pt-8 pb-8 text-center gap-8 text-lg lg:w-[96%] md:w-[96%] lg:mr-8 lg:ml-8">
+    <div class="border-[1px] shadow-lg shadow-green-100 rounded-xl pt-8 pb-8 pr-4 pl-4 h-[200px] md:h-fit">
+        <p class="pb-4">To send &#8358; click the button below</p>
+        <button class="bg-green-500 w-20 h-9 text-white rounded-md hover:bg-green-400 active:text-sm focus:bg-green-500"><a href="send.html" target="_blank">Send</a></button>
     </div>
 
-    <div class="lg:mr-8 lg:ml-8 m-2">
-        <iframe class="mt-16 mb-16 border-solid border-2 shadow-green-200 shadow-md w-full h-fit" src="price.html" title="Current Forex">
-        </iframe>
+    <div class="border-[1px] shadow-lg shadow-green-100 rounded-xl pt-8 pb-8 pr-4 pl-4 h-[200px] md:h-fit">
+        <p class="pb-4">To receive &euro; click the button below</p>
+        <button class="bg-blue-500 w-20 h-9 text-white rounded-md hover:bg-blue-400 active:text-sm focus:bg-blue-500 disabled:bg-red-500" type="button" disabled><a href="#" target="">Receive</a></button>
     </div>
-    
-    <!-- price calculator -->
-    <div class="border-2 border-gray-50 mx-2 mb-8 rounded-b-sm shadow-sm py-8 shadow-green-200">
-        <div id="#forex-send" class="border-2 border-gray-100 mx-auto rounded-md py-6 px-4 w-fit grid">
-            <p class="text-center text-lg">Send</p>
-            <label for="euro" class="mr-l">Euro</label>
-            <input id="#euro" class="border-2 border-gray 300 rounded-md pl-2" value="1.00" type="number">
-            <label for="naira" class="mr-l">Naira</label>
-            <input id="#naira" class="border-2 border-gray 300 rounded-md pl-2" value="674" type="number" readonly>
-            <div class="text-center mt-4 grid grid-cols-2 gap-4">
-                <button class="bg-blue-500 text-white w-24 h-9 rounded-md" onclick=sendCalc()>Convert</button>
-                <button class="bg-yellow-500 text-white w-24 h-9 rounded-md" onclick=resetSendCalcBtn()>Reset</button>
-            </div>
-            <a class="text-xs text-gray-400 pt-2 hover:text-gray-600 cursor-pointer w-fit" onclick=toggleSendCalc()>Want to receive Euro?</a>
-        </div>
-
-        
-        <div id="#forex-receive" class="border-2 border-gray-100 mx-auto rounded-md py-6 px-4 w-fit grid">
-            <p class="text-center text-lg">Receive</p>
-            <label for="euro" class="mr-l">Euro</label>
-            <input id="#euro-receive" class="border-2 border-gray 300 rounded-md pl-2" value="1.00" type="number">
-            <label for="naira" class="mr-l">Naira</label>
-            <input id="#naira-receive" class="border-2 border-gray 300 rounded-md pl-2" value="687" type="number" readonly>
-            <div class="text-center mt-4 grid grid-cols-2 gap-4">
-                <button class="bg-blue-500 text-white w-24 h-9 rounded-md" onclick=receiveCalc()>Convert</button>
-                <button class="bg-yellow-500 text-white w-24 h-9 rounded-md" onclick=resetReceiveCalcBtn()>Reset</button>
-            </div>
-            <a class="text-xs text-gray-400 pt-2 hover:text-gray-600 cursor-pointer w-fit" onclick=toggleReceiveCalc()>Want to send Naira?</a>
-        </div>
-    </div>
-
-    <!-- send and receive section -->
-    <div class="inline-grid grid-cols-2 border-2 shadow-md rounded-b-md shadow-green-200 m-2 pr-8 pl-8 pt-8 pb-8 text-center gap-8 text-lg lg:w-[96%] md:w-[96%] lg:mr-8 lg:ml-8">
-        <div class="border-[1px] shadow-lg shadow-green-100 rounded-xl pt-8 pb-8 pr-4 pl-4 h-[200px] md:h-fit">
-            <p class="pb-4">To send &#8358; click the button below</p>
-            <button class="bg-green-500 w-20 h-9 text-white rounded-md hover:bg-green-400 active:text-sm focus:bg-green-500"><a href="send.html" target="_blank">Send</a></button>
-        </div>
-
-        <div class="border-[1px] shadow-lg shadow-green-100 rounded-xl pt-8 pb-8 pr-4 pl-4 h-[200px] md:h-fit">
-            <p class="pb-4">To receive &euro; click the button below</p>
-            <button class="bg-blue-500 w-20 h-9 text-white rounded-md hover:bg-blue-400 active:text-sm focus:bg-blue-500 disabled:bg-red-500" type="button" disabled><a href="#" target="">Receive</a></button>
-        </div>
-    </div>
-
-    <!-- footer section -->
-    <footer class="mt-8 mb-2 text-center text-green-300 text-xs w-full bottom-0 relative lg:pt-32">licences and other info</footer>
-    <script src="script.js"></script>
-</body>
-</html>
-
-
+</div>
 <!-- https://moniepoint.com/ -->
+{% endblock content %}
