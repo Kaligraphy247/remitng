@@ -1,6 +1,6 @@
-newfile
 bin
 include/
 lib
 lib64
 pyvenv.cfg
+website/__pycache__
