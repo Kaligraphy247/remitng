@@ -17,6 +17,7 @@ def cache_soup_name_datetime(filename: str) -> None:
     now = datetime.datetime.now()
     date_time = now.strftime("%m-%d-%Y-%H-%M-%S")
     new_filename = f"{filename}-{date_time}.html"
+    # print(new_filename) # debug
     return new_filename
 
 
@@ -32,7 +33,6 @@ def cache_source_soup(url: str):
 
 
 # cache_source_soup(url=SOUP_URL)
-
 
 
 
@@ -70,37 +70,39 @@ def delete_old_cached_soup():
             return "Nothing to clear at this time"
 
 
-
-
-if __name__ == "__main__":
-    print("Site is running, no issues so far")
-    cached_soup = get_current_soup(dir=SOUP_DIR)
-
-    with open(cached_soup, "r", encoding="utf-8") as f:
-        doc_file = bs(f, "html.parser")
-
-    # # print(doc_file)
-    tags = doc_file.find_all("table")
-    # USD black market prices
-    current_date_usd = tags[1].find_all("td")[4]
-    selling_rate_usd = tags[1].find_all("td")[6]
-    buying_rate_usd  = tags[1].find_all("td")[7]
-    print(current_date_usd.string, selling_rate_usd.string, buying_rate_usd.string)
-
-    # EUR black market prices
-    current_date_eur = tags[1].find_all("td")[12]
-    selling_rate_eur = tags[1].find_all("td")[14]
-    buying_rate_eur  = tags[1].find_all("td")[15]
-    print(current_date_eur.string, selling_rate_eur.string, buying_rate_eur.string)
-
+def run_soup():
+    """Does all the needfull tasks"""
     four_days = 86400 * 4
-    
     schedule.every().day.at("09:30").do(cache_source_soup, url=SOUP_URL)
-    # schedule.every(5).seconds.do(cache_source_soup, url=SOUP_URL) # debug
+    # schedule.every(5).seconds.do(cache_soup_name_datetime, "newsoup")
     schedule.every(four_days).seconds.do(delete_old_cached_soup) 
-    # schedule.every(5).seconds.do(delete_old_cached_soup) # debug
 
     while True:
         schedule.run_pending()
         time.sleep(1)
 
+
+
+print("Site is running, no issues so far")
+cached_soup = get_current_soup(dir=SOUP_DIR)
+
+with open(cached_soup, "r", encoding="utf-8") as f:
+    doc_file = bs(f, "html.parser")
+
+# # print(doc_file)
+tags = doc_file.find_all("table")
+# USD black market prices
+current_date_usd = tags[1].find_all("td")[4]
+selling_rate_usd = tags[1].find_all("td")[6]
+buying_rate_usd  = tags[1].find_all("td")[7]
+print(current_date_usd.string, selling_rate_usd.string, buying_rate_usd.string)
+
+# EUR black market prices
+current_date_eur = tags[1].find_all("td")[12].string
+selling_rate_eur = tags[1].find_all("td")[14].string
+buying_rate_eur  = tags[1].find_all("td")[15].string
+print(current_date_eur.string, selling_rate_eur.string, buying_rate_eur.string)
+
+
+# if __name__ == "__main__":
+#     run_soup()

@@ -4,3 +4,5 @@ lib
 lib64
 pyvenv.cfg
 website/__pycache__
+website/black/__pycache__
+*.env

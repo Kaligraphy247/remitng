@@ -1,0 +1,34 @@
+<style>
+    h3 {
+        color: red;
+        text-align: center;
+    }
+    html {
+        margin: 4px;
+    }
+    div {
+        /* border: 2px solid red; */
+        text-align: center;
+    }
+
+    img {
+        width: 640px;
+        height: 480px;
+    }
+
+    button {
+        margin-top: 8px;
+        background-color: rgb(74, 122, 184);
+        color: white;
+    }
+
+</style>
+
+<h3>This page is here simply because we can't Buy Euro yet.<br>
+    So stay tuned and have a nice 404 error instead 😏</h3>
+<div> 
+    <img src="{{url_for('static', filename='img/404-not-found-u-better-find-it.jpg')}}">
+</div>
+
+<!-- <a href="">Go Back</a> -->
+<button type="button" onclick=javascript:history.back()>Go back</button>

@@ -2,6 +2,7 @@
 
 {% block content %}
 
+
 <div>
     <p class="text-3xl text-gray-900 text-center pt-8 mb-2 first-letter:capitalize">Send and receive Euro to and from Nigeria</p>
     <img src="{{ url_for('static', filename='img/geld.jpg') }}" alt="image of money from bahn.de" class="mx-auto rounded-md w-96 h-48 object-fill">
@@ -15,30 +16,30 @@
 <!-- price calculator -->
 <div class="border-2 border-gray-50 mx-2 mb-8 rounded-b-sm shadow-sm py-8 shadow-green-200">
     <div id="#forex-send" class="border-2 border-gray-100 mx-auto rounded-md py-6 px-4 w-fit grid">
-        <p class="text-center text-lg">Send</p>
+        <p class="text-center text-lg">Calculator &middot; Sell Euro</p>
         <label for="euro" class="mr-l">Euro</label>
         <input id="#euro" class="border-2 border-gray 300 rounded-md pl-2" value="1.00" type="number">
         <label for="naira" class="mr-l">Naira</label>
-        <input id="#naira" class="border-2 border-gray 300 rounded-md pl-2" value="674" type="number" readonly>
+        <input id="#naira" class="border-2 border-gray 300 rounded-md pl-2" value="{{price_info[1]}}" type="number" readonly>
         <div class="text-center mt-4 grid grid-cols-2 gap-4">
             <button class="bg-blue-500 text-white w-24 h-9 rounded-md" onclick=sendCalc()>Convert</button>
             <button class="bg-yellow-500 text-white w-24 h-9 rounded-md" onclick=resetSendCalcBtn()>Reset</button>
         </div>
-        <a class="text-xs text-gray-400 pt-2 hover:text-gray-600 cursor-pointer w-fit" onclick=toggleSendCalc()>Want to receive Euro?</a>
+        <a class="text-xs text-gray-400 pt-2 hover:text-gray-600 cursor-pointer w-fit" onclick=toggleSendCalc()>Want to buy Euro?</a>
     </div>
 
     
     <div id="#forex-receive" class="border-2 border-gray-100 mx-auto rounded-md py-6 px-4 w-fit grid">
-        <p class="text-center text-lg">Receive</p>
+        <p class="text-center text-lg">Calculator &middot; Buy Euro</p>
         <label for="euro" class="mr-l">Euro</label>
         <input id="#euro-receive" class="border-2 border-gray 300 rounded-md pl-2" value="1.00" type="number">
         <label for="naira" class="mr-l">Naira</label>
-        <input id="#naira-receive" class="border-2 border-gray 300 rounded-md pl-2" value="687" type="number" readonly>
+        <input id="#naira-receive" class="border-2 border-gray 300 rounded-md pl-2" value="{{price_info[0]}}" type="number" readonly>
         <div class="text-center mt-4 grid grid-cols-2 gap-4">
             <button class="bg-blue-500 text-white w-24 h-9 rounded-md" onclick=receiveCalc()>Convert</button>
             <button class="bg-yellow-500 text-white w-24 h-9 rounded-md" onclick=resetReceiveCalcBtn()>Reset</button>
         </div>
-        <a class="text-xs text-gray-400 pt-2 hover:text-gray-600 cursor-pointer w-fit" onclick=toggleReceiveCalc()>Want to send Naira?</a>
+        <a class="text-xs text-gray-400 pt-2 hover:text-gray-600 cursor-pointer w-fit" onclick=toggleReceiveCalc()>Want to sell Naira?</a>
     </div>
 </div>
 
@@ -46,12 +47,12 @@
 <div class="inline-grid grid-cols-2 border-2 shadow-md rounded-b-md shadow-green-200 m-2 pr-8 pl-8 pt-8 pb-8 text-center gap-8 text-lg lg:w-[96%] md:w-[96%] lg:mr-8 lg:ml-8">
     <div class="border-[1px] shadow-lg shadow-green-100 rounded-xl pt-8 pb-8 pr-4 pl-4 h-[200px] md:h-fit">
         <p class="pb-4">To send &#8358; click the button below</p>
-        <button class="bg-green-500 w-20 h-9 text-white rounded-md hover:bg-green-400 active:text-sm focus:bg-green-500"><a href="send.html" target="_blank">Send</a></button>
+        <button class="bg-green-500 w-20 h-9 text-white rounded-md hover:bg-green-400 active:text-sm focus:bg-green-500"><a href="{{ url_for('views.send') }}" target="_blank">Send</a></button>
     </div>
 
     <div class="border-[1px] shadow-lg shadow-green-100 rounded-xl pt-8 pb-8 pr-4 pl-4 h-[200px] md:h-fit">
         <p class="pb-4">To receive &euro; click the button below</p>
-        <button class="bg-blue-500 w-20 h-9 text-white rounded-md hover:bg-blue-400 active:text-sm focus:bg-blue-500 disabled:bg-red-500" type="button" disabled><a href="#" target="">Receive</a></button>
+        <button class="bg-blue-500 w-20 h-9 text-white rounded-md hover:bg-blue-400 active:text-sm focus:bg-blue-500 disabled:bg-red-500" type="button" disabled><a href="{{ url_for('views.home') }}" target="">Receive</a></button>
     </div>
 </div>
 <!-- https://moniepoint.com/ -->
