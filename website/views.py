@@ -24,7 +24,7 @@ def home():
     # EUR = main.buying_rate_eur
     # EUR2 = main.selling_rate_eur
     # return f"{EUR}, {EUR2}"
-    return render_template(template_name_or_list='404.html')
+    return render_template(template_name_or_list='404_temp.html')
 
 @views.route("/send")
 def send():
@@ -47,4 +47,4 @@ def prices():
 @views.errorhandler(404)
 def notFound(error):
     """Not Found error, 404"""
-    return "Not Found - 404 error handler", 404
+    return render_template(template_name_or_list="404.html")
