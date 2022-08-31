@@ -11,7 +11,7 @@ views = Blueprint(name='views', import_name=__name__)
 def index():
     # it is reverse in this case
     buy_eur = main.selling_rate_eur
-    sell_eur = main.buying_rate_eur
+    sell_eur = int(main.buying_rate_eur) - 15
     date = main.current_date_eur
     price_info = (buy_eur, sell_eur, date)
     return render_template(template_name_or_list='index.html', price_info=price_info)
@@ -37,8 +37,8 @@ def receive():
 
 @views.route("/price")
 def prices():
-    buy_eur = main.selling_rate_eur
-    sell_eur = main.buying_rate_eur
+    buy_eur = main.selling_rate_eur 
+    sell_eur = int(main.buying_rate_eur) - 15
     date = main.current_date_eur
     price_info = (buy_eur, sell_eur, date)
     return render_template(template_name_or_list='price.html', price_info=price_info)
@@ -47,5 +47,4 @@ def prices():
 @views.errorhandler(404)
 def notFound(error):
     """Not Found error, 404"""
-    
     return "Not Found - 404 error handler", 404
